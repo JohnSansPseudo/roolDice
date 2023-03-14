@@ -1,0 +1,18 @@
+.ctnCurrentScore{
+    display: inline-block;
+    background-color: #eb4d4c;
+    padding: 20px;
+}
+
+.txtLapScore {
+    color: #eb4d4c;
+    font-size: 4rem;
+}
+
+.txtPlayerName{
+    text-transform: uppercase;
+}
+
+.elVerticalCenter {
+    transform: translateY(-50%);
+}
