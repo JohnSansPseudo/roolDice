@@ -1,3 +1,8 @@
+body{
+    font-family: Lato, 'sans-serif';
+}
+
+
 .ctnCurrentScore{
     display: inline-block;
     background-color: #eb4d4c;
@@ -15,4 +20,62 @@
 
 .elVerticalCenter {
     transform: translateY(-50%);
+}
+
+.dotCurrentPlayer{
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: #eb4d4c;
+    margin-left: 10px;
+}
+
+
+
+#ctnBtnNewGame{
+    margin-top: 20px;
+}
+
+#ctnDiceResult{
+    color: #eb4d4c;
+}
+
+#ctnDiceResult i{
+    font-size: 3rem;
+}
+
+#btnNewGame i,
+#ctnActionUser .fa-arrows-rotate,
+#ctnActionUser .fa-arrow-right-to-bracket{
+    color: #eb4d4c;
+    margin-right: 5px;
+}
+#ctnActionUser{
+    margin-top: -15px;
+}
+#ctnActionUser div{
+    margin-bottom: 20px;
+}
+
+#btnNewGame:hover i{
+    color: white;
+}
+
+#btnNewGame:active{
+    background-color: #9b3433;
+}
+
+
+
+
+/** UTILITIES */
+
+.mHover{
+    cursor: pointer;
+}
+
+.hide,
+i.hide{
+    display: none;
 }
