@@ -17,54 +17,52 @@
 <body>
 <div class="container-fluid">
     <main>
-        <div class="body">
-            <div class="row">
-                <div class="col-12 position-absolute top-0 start-0 d-flex justify-content-center z-1 " id="ctnBtnNewGame">
-                    <button type="button" class="btn btn-outline-danger" id="btnNewGame"><i class="fa-solid fa-circle-plus"></i>New game</button>
+        <div class="row">
+            <div class="col-12 position-absolute top-0 start-0 d-flex justify-content-center z-1 " id="ctnBtnNewGame">
+                <button class="btn btn-outline-danger" id="btnNewGame"><i class="fa-solid fa-circle-plus"></i>New game</button>
+            </div>
+            <div class="col-6 bg-light position-absolute top-0 bottom-0 start-0"></div>
+            <div class="col-12">
+                <div class="row pt-5">
+                    <div class="col-6 text-center txtPlayerName fs-2 z-1 d-flex justify-content-center align-items-center">
+                        <span>Player 1</span>
+                        <span id="dotPlayer1" class="dotCurrentPlayer z-1 hide"></span>
+                    </div>
+                    <div class="col-6 text-center txtPlayerName fs-2 z-1 d-flex justify-content-center align-items-center ">
+                        <span>Player 2</span>
+                        <span id="dotPlayer2" class="dotCurrentPlayer z-1 hide"></span></div>
                 </div>
-                <div class="col-6 bg-light position-absolute top-0 bottom-0 start-0"></div>
-                <div class="col-12">
-                    <div class="row pt-5">
-                        <div class="col-6 text-center txtPlayerName fs-2 z-1 d-flex justify-content-center align-items-center">
-                            <span>Player 1</span>
-                            <span id="dotPlayer1" class="dotCurrentPlayer z-1"></span>
-                        </div>
-                        <div class="col-6 text-center txtPlayerName fs-2 z-1 d-flex justify-content-center align-items-center ">
-                            <span>Player 2</span>
-                            <span id="dotPlayer2" class="dotCurrentPlayer z-1 hide"></span></div>
-                    </div>
-                    <div class="row align-items-center position-relative">
-                        <div class="col-6 text-center txtLapScore z-1">43</div>
-                        <div class="col-6 text-center txtLapScore">72</div>
-                        <div class="col-12 position-absolute top-50 start-0 d-flex justify-content-center z-1 elVerticalCenter px-0">
-                            <div id="ctnDiceResult">
-                                <i class="fa-solid fa-dice-one fa-2xl "></i>
-                                <i class="fa-solid fa-dice-two fa-2xl hide"></i>
-                                <i class="fa-solid fa-dice-three fa-2xl hide"></i>
-                                <i class="fa-solid fa-dice-four fa-2xl hide"></i>
-                                <i class="fa-solid fa-dice-five fa-2xl hide"></i>
-                                <i class="fa-solid fa-dice-six fa-2xl hide"></i>
-                            </div>
+                <div class="row align-items-center position-relative">
+                    <div class="col-6 text-center txtLapScore z-1" id="lapScorePlayer1">0</div>
+                    <div class="col-6 text-center txtLapScore " id="lapScorePlayer2">0</div>
+                    <div class="col-12 position-absolute top-50 start-0 d-flex justify-content-center z-1 elVerticalCenter px-0">
+                        <div id="ctnDiceResult">
+                            <i class="fa-solid fa-dice-one fa-2xl "></i>
+                            <i class="fa-solid fa-dice-two fa-2xl hide"></i>
+                            <i class="fa-solid fa-dice-three fa-2xl hide"></i>
+                            <i class="fa-solid fa-dice-four fa-2xl hide"></i>
+                            <i class="fa-solid fa-dice-five fa-2xl hide"></i>
+                            <i class="fa-solid fa-dice-six fa-2xl hide"></i>
                         </div>
                     </div>
-                    <div class="row align-items-center position-relative mt-5">
-                        <div class="col-6 text-center">
-                            <div class="ctnCurrentScore">
-                                <div >CURRENT</div>
-                                <div class="text-white fs-3">45</div>
-                            </div>
+                </div>
+                <div class="row align-items-center position-relative mt-5">
+                    <div class="col-6 text-center">
+                        <div class="ctnCurrentScore">
+                            <div >CURRENT</div>
+                            <div class="text-white fs-3" id="currentScorePlayer1">0</div>
                         </div>
-                        <div class="col-6 text-center">
-                            <div class="ctnCurrentScore">
-                                <div >CURRENT</div>
-                                <div class="text-white fs-3">45</div>
-                            </div>
+                    </div>
+                    <div class="col-6 text-center">
+                        <div class="ctnCurrentScore">
+                            <div >CURRENT</div>
+                            <div class="text-white fs-3" id="currentScorePlayer2">0</div>
                         </div>
-                        <div class="col-12 position-absolute top-50 start-0 d-flex justify-content-center z-1 align-items-center px-0">
-                            <div class="row justify-content-center" id="ctnActionUser">
-                                <div class="col-12 text-center mHover"><i id="btnRollDice" class="fa-solid fa-arrows-rotate "></i>Roll dice</div>
-                                <div class="col-12 text-center mHover"><i id="btnHold" class="fa-solid fa-arrow-right-to-bracket fa-rotate-90 "></i>Hold</div>
-                            </div>
+                    </div>
+                    <div class="col-12 position-absolute top-50 start-0 d-flex justify-content-center z-1 align-items-center px-0">
+                        <div class="row justify-content-center" id="ctnActionUser">
+                            <div class="col-12 text-center mHover" id="btnRollDice"><i  class="fa-solid fa-arrows-rotate "></i>Roll dice</div>
+                            <div class="col-12 text-center mHover" id="btnHold"><i  class="fa-solid fa-arrow-right-to-bracket fa-rotate-90 "></i>Hold</div>
                         </div>
                     </div>
                 </div>
@@ -78,6 +76,6 @@
 <!-- script -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/3f28ba2509.js" crossorigin="anonymous"></script>
-<script src="script.js"></script>
+<script src="script.js?v=1"></script>
 </body>
 </html>

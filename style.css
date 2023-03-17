@@ -79,3 +79,37 @@ body{
 i.hide{
     display: none;
 }
+
+
+/*-------------------------------*\
+                OUTIL
+\*-------------------------------*/
+/* TOAST */
+.ctnToaster {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.8;
+    color: white;
+    width: 40vw;
+    height: 20vh;
+    padding: 20px;
+    z-index: 12;
+    text-align: center;
+    border-radius: 10px;
+}
+.ctnToaster i { margin-right: 10px; }
+
+.successToast { background-color: forestgreen; }
+.warningToast { background-color: orangered; }
+.dangerToast { background-color: red; }
+.infoToast { background-color: dodgerblue}
+.errorToast {
+    background-color: lightgrey;
+    color: black;
+}
+/* FIN TOAST */
