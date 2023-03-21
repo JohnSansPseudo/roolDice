@@ -85,22 +85,26 @@ i.hide{
                 OUTIL
 \*-------------------------------*/
 /* TOAST */
-.ctnToaster {
+#boxCtnToast{
     position: fixed;
+    top: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40vw;
+    height: 20vh;
+    z-index: 10;
+}
+.ctnToaster {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 30vh;
-    left: 50%;
-    transform: translateX(-50%);
     opacity: 0.8;
     color: white;
-    width: 40vw;
-    height: 20vh;
     padding: 20px;
-    z-index: 12;
+    cursor: pointer;
     text-align: center;
     border-radius: 10px;
+    margin-top: 20px;
 }
 .ctnToaster i { margin-right: 10px; }
 
