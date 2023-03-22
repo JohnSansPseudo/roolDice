@@ -1,67 +1,28 @@
 class Player
 {
-    static ID_DOT_PLAYER = 'dotPlayer';
-    static CLASS_TOGGLE_DOT_PLAYER = 'hide';
+   constructor(iId)
+   {
+        this.id = null;
+        this.setIdPlayer(iId);
+        this.oDotPlayer = new ToggleClassDomElement('dotPlayer' + this.id, 'hide');
+        this.oLapScore = new IntDomElement('lapScorePlayer' + this.id, 0, 99);
+        this.oCurrentScore = new IntDomElement('currentScorePlayer' + this.id, 0, 100);
+    }
 
-    static ID_LAP_SCORE = 'lapScorePlayer';
-    static INT_LAP_SCORE_MAX = 99;
-    static INT_LAP_SCORE_MIN = 0;
-
-    static ID_CURRENT_SCORE = 'currentScorePlayer';
-    static INT_CURRENT_SCORE_MAX = 100;
-    static INT_CURRENT_SCORE_MIN = 0;
-
-
-    constructor(iId){
-        if(! new ParamIntCheck(iId, 'iId', 'Player => constructor => ').setMin(1).setMax(2).getStrErr()) return false;
+    setIdPlayer(iId)
+    {
+        if(! new ParamIntCheck(iId, 'iId', 'Player => setIdPlayer => ').setMin(1).setMax(2).getStrErr()) return 0;
         this.id = iId;
-        this.oDotPlayer = this.getDotPlayerObj();
-        this.oLapScore = this.getLapScoreObj();
-        this.oCurrentScore = this.getCurrentScoreObj();
     }
 
-    /** DOT PLAYER **/
-    getDotPlayerObj()
+    getIdPlayer()
     {
-        if(! new ParamIntCheck(this.id, 'this.id', 'Player => getDotPlayerObj => ').getStrErr()) return false;
-        let oDotPlayer = document.getElementById(Player.ID_DOT_PLAYER + this.id);
-        if(! new ParamObjCheck(oDotPlayer, 'oDotPlayer', 'Player => getDotPlayerObj => ').getStrErr()) return false;
-        return oDotPlayer;
+        if(! new ParamIntCheck(this.id, 'this.id', 'Player => setIdPlayer => ').setMin(1).setMax(2).getStrErr()) return 0;
+        return this.id;
     }
-
-    setDotCurrentPlayerOn()
-    {
-        if(! new ParamObjCheck(this.oDotPlayer, 'this.oDotPlayer', 'Player => setDotCurrentPlayerOn => ').getStrErr()) return false;
-        this.oDotPlayer.classList.remove(Player.CLASS_TOGGLE_DOT_PLAYER);
-    }
-    setDotCurrentPlayerOff()
-    {
-        if(! new ParamObjCheck(this.oDotPlayer, 'this.oDotPlayer', 'Player => setDotCurrentPlayerOff => ').getStrErr()) return false;
-        this.oDotPlayer.classList.add(Player.CLASS_TOGGLE_DOT_PLAYER);
-    }
-    /** FIN DOT PLAYER **/
 
 
     /** LAP SCORE - ROUND SCORE **/
-    getLapScoreObj()
-    {
-        if(! new ParamIntCheck(this.id, 'this.id', 'Player => getLapScoreObj =>  ').getStrErr()) return false;
-        let oLapScorePlayer = document.getElementById(Player.ID_LAP_SCORE + this.id);
-        if(! new ParamObjCheck(oLapScorePlayer, 'oLapScorePlayer', 'Player => getLapScoreObj =>  ').getStrErr()) return false;
-        return oLapScorePlayer;
-    }
-    getIntLapScore()
-    {
-        if(! new ParamObjCheck(this.oLapScore, 'this.oLapScore', 'Player => getIntLapScore => ').getStrErr()) return false;
-        return parseInt(this.oLapScore.textContent);
-    }
-    setIntLapScore(iScore)
-    {
-        if(! new ParamIntCheck(iScore, 'iScore', 'Player => setIntLapScore => ').setMin(Player.INT_LAP_SCORE_MIN).setMax(Player.INT_LAP_SCORE_MAX).getStrErr()) return false;
-        if(! new ParamObjCheck(this.oLapScore, 'this.oLapScore', 'Player => setIntLapScore => ').getStrErr()) return false;
-        this.oLapScore.textContent = iScore;
-    }
-
     increaseIntLapScore(iScore)
     {
         //Le lap score ne peut pas être de 1 puisque quand le joueur fait 1 il passe son tour et son lap score passe à 0
@@ -72,91 +33,221 @@ class Player
         if(Object.values(oParamIntCheck.oErr).length > 0)
         {
             new ToastAlert(ToastAlert.INFO, oParamIntCheck.getStrErrVal());
-            this.setIntLapScore(0);
+            this.oLapScore.setIntValue(0);
             return;
         }
 
-        let iLapScore = this.getIntLapScore();
-        if(! new ParamIntCheck(iLapScore, 'iLapScore', 'Player => ' + sFunction + ' => ').getStrErr()) return false;
-        iScore = parseInt(iScore);
-        iLapScore += iScore;
-        this.setIntLapScore(iLapScore);
+        let iLapScore = this.oLapScore.getIntValue();
+        iLapScore += parseInt(iScore);
+        this.oLapScore.setIntValue(iLapScore);
     }
     /** FIN LAP SCORE **/
 
 
-
     /** CURRENT SCORE -- GLOBAL SCORE**/
-    getCurrentScoreObj()
-    {
-        if(! new ParamIntCheck(this.id, 'this.id').getStrErr()) return false;
-        let oCurrentScorePlayer = document.getElementById('currentScorePlayer' + this.id);
-        if(! new ParamObjCheck(oCurrentScorePlayer, 'oCurrentScorePlayer', 'Player => getCurrentScoreObj => ').getStrErr()) return false;
-        return oCurrentScorePlayer;
-    }
-
-    getIntCurrentScore()
-    {
-        let oCurrentScore = this.oCurrentScore;
-        if(! new ParamObjCheck(oCurrentScore, 'oCurrentScore', 'Player => getIntCurrentScore => ').getStrErr()) return false;
-        return parseInt(this.oCurrentScore.textContent);
-    }
-
-    setIntCurrentScore(iScore)
-    {
-        //Ici il est possible de mettre le current score à 0 si le jeu l'exige, pour l'initiation du jeu par exemple.
-        let oParam = new ParamIntCheck(iScore, 'iScore' ,'Player => setIntCurrentScore => ');
-        oParam.setMin(Player.INT_CURRENT_SCORE_MIN).setMax(Player.INT_CURRENT_SCORE_MAX).getStrErr();
-        if(! oParam.setMin(Player.INT_CURRENT_SCORE_MIN).setMax(Player.INT_LAP_SCORE_MAX).getStrErr()) return false;
-        this.oCurrentScore.textContent = iScore;
-    }
-
     increaseIntCurrentScore(iScore)
     {
         //Le lap score (ici iScore) ne peut pas être de 1 puisque quand le joueur fait 1 il passe son tour et son lap score passe à 0
         //Le lap score (ici iScore) ne peut pas être de 0 ça ne sert à rien d'ajouter 0 au score global
         //Le lap score (ici iScore) n'a pas de maximum mais on considère que si le joueur obtient un lap score de 100 alors c'est truqué
 
-        let oParamIntCheck = new ParamIntCheck(iScore, 'iScore', 'Player => increaseIntCurrentScore').setMin(2).setMax(Player.INT_LAP_SCORE_MAX);
+        let oParamIntCheck = new ParamIntCheck(iScore, 'iScore', 'Player => increaseIntCurrentScore').setMin(2).setMax(this.oLapScore.oParamInt.getIntMax());
         if(Object.values(oParamIntCheck.oErr).length > 0)
         {
             let oToast = new ToastAlert(ToastAlert.INFO, oParamIntCheck.getStrErrVal());
-            this.setIntLapScore(0);
+            this.oLapScore.setIntValue(0);
             return;
         }
 
-        let iCurrentScore = this.getIntCurrentScore();
+        let iCurrentScore = this.oCurrentScore.getIntValue();
         iCurrentScore += parseInt(iScore);
-        if(iCurrentScore > Player.INT_CURRENT_SCORE_MAX) iCurrentScore = Player.INT_CURRENT_SCORE_MAX;
-        this.setIntCurrentScore(iCurrentScore);
+        if(iCurrentScore > this.oCurrentScore.oParamInt.getIntMax()) iCurrentScore = this.oCurrentScore.oParamInt.getIntMax();
+        this.oCurrentScore.setIntValue(iCurrentScore);
     }
     /** FIN CURRENT SCORE **/
 
-    rollDice(iRandomDice)
+    rollDicePlayer()
     {
-        if(!new ParamIntCheck(iRandomDice, 'iRandomDice', 'Player => rollDice').setMin(BoardGame.MIN_DICE).setMax(BoardGame.MAX_DICE)) return false;
+
         if(iRandomDice === 1) {
-            this.setIntLapScore(0);
-            if(this.id === 1) oBoardGame.setPlayerTurn(2);
-            else if(this.id === 2) oBoardGame.setPlayerTurn(1);
+            this.oLapScore.setIntValue(0);
+            if(this.getIdPlayer() === 1) oBoardGame.setPlayerTurn(2);
+            else if(this.getIdPlayer() === 2) oBoardGame.setPlayerTurn(1);
             oBoardGame.messageSwitchTurn();
         } else { this.increaseIntLapScore(iRandomDice); }
         oBoardGame.rollDiceIcon(iRandomDice);
     }
 
+
     hold()
     {
-        if(!new ParamIntCheck(this.getIntLapScore(), 'this.getIntLapScore()', 'Player => hold')) return false;
-        this.increaseIntCurrentScore(this.getIntLapScore());
-
-        if(!new ParamIntCheck(this.getIntCurrentScore(), 'this.getIntCurrentScore()', 'Player => hold')) return false;
-        if(this.getIntCurrentScore() === Player.INT_CURRENT_SCORE_MAX) { oBoardGame.endGame(); }
+        this.increaseIntCurrentScore(this.oLapScore.getIntValue());
+        if(this.oCurrentScore.getIntValue() === this.oCurrentScore.getIntMax()) { oBoardGame.endGame(); }
         else {
-            if(!new ParamIntCheck(this.id, 'this.id', 'Player => hold')) return false;
-            if(this.id === 1) oBoardGame.setPlayerTurn(2);
-            else if(this.id === 2) oBoardGame.setPlayerTurn(1);
-            this.setIntLapScore(0);
+            this.oLapScore.setIntValue(0);
+            if(this.getIdPlayer() === 1) oBoardGame.setPlayerTurn(2);
+            else if(this.getIdPlayer() === 2) oBoardGame.setPlayerTurn(1);
+            else{
+                alert(`Error idPlayer : ${this.getIdPlayer()}`);
+                return false;
+            }
         }
     }
 
+
+}
+
+class Dice
+{
+    constructor() {
+        this.oCtnDice = new DomElement('ctnDiceResult');
+        this.oParamInt = new IntParam(1, 6);
+    }
+    rollDice()
+    {
+        const iRandomDice = this.getNumberRandom();
+        this.switchRollDiceIcon(iRandomDice);
+        return iRandomDice;
+    }
+
+    switchRollDiceIcon(iDice)
+    {
+        //Masquer tous les dés
+        let oCtnDice = this.oCtnDice.getObjDomElement();
+        oCtnDice.querySelectorAll('i').forEach(function(oDice){ oDice.classList.add('hide'); });
+        //Afficher le bon dé
+        switch(iDice)
+        {
+            case 1: oCtnDice.querySelector('.fa-dice-one').classList.remove('hide'); break;
+            case 2: oCtnDice.querySelector('.fa-dice-two').classList.remove('hide'); break;
+            case 3: oCtnDice.querySelector('.fa-dice-three').classList.remove('hide'); break;
+            case 4: oCtnDice.querySelector('.fa-dice-four').classList.remove('hide'); break;
+            case 5: oCtnDice.querySelector('.fa-dice-five').classList.remove('hide'); break;
+            case 6: oCtnDice.querySelector('.fa-dice-six').classList.remove('hide'); break;
+            default: alert('Error switch Dice => switchRollDiceIcon'); break;
+        }
+    }
+
+    getNumberRandom()
+    {
+        const i = Math.ceil(Math.random() * ((this.oParamInt.iMax  - this.oParamInt.iMin) + this.oParamInt.iMin));
+        if(!new ParamIntCheck(i, 'i', 'Dice => getNumberRandom').setMin(this.oParamInt.iMin).setMax(this.oParamInt.iMax)) return false;
+        return i;
+    }
+}
+
+class DomElement
+{
+    constructor(sIdElement)
+    {
+        this.sIdElement = null;
+        this.oObject = null;
+
+        this.setIdElement(sIdElement);
+        this.setObjDomElement(this.findObjDomElement());
+    }
+
+    setIdElement(sIdElement)
+    {
+        //ParamString check
+        this.sIdElement = sIdElement;
+    }
+
+    findObjDomElement()
+    {
+        let o = document.getElementById(this.sIdElement);
+        if(! new ParamObjCheck(o, 'o', 'DomElement => getObjElement =>').getStrErr())return false;
+        return o
+    }
+
+    setObjDomElement(oObj)
+    {
+        if(! new ParamObjCheck(oObj, 'oObj', 'DomElement => setObjDomElement =>').getStrErr())return false;
+        this.oObject = oObj;
+    }
+
+    getObjDomElement()
+    {
+        if(! new ParamObjCheck(this.oObject, 'this.oObject', 'DomElement => getObjDomElement =>').getStrErr())return false;
+        return this.oObject;
+    }
+}
+
+class IntParam
+{
+    constructor(iMin, iMax) {
+        this.iMin = null;
+        this.iMax = null;
+        this.setIntMin(iMin);
+        this.setIntMax(iMax);
+    }
+
+    getIntMin()
+    {
+        if(!new ParamIntCheck(this.iMin, 'this.iMin', 'IntDomElement => getIntMin').getStrErr()) return false;
+        return this.iMin;
+    }
+
+    setIntMin(iMin)
+    {
+        if(!new ParamIntCheck(iMin, 'iMin', 'IntDomElement => setIntMin').getStrErr()) return false;
+        this.iMin = iMin;
+    }
+
+    getIntMax()
+    {
+        if(!new ParamIntCheck(this.iMax, 'this.iMax', 'IntDomElement => getIntMax').getStrErr()) return false;
+        return this.iMax;
+    }
+
+    setIntMax(iMax)
+    {
+        if(!new ParamIntCheck(iMax, 'iMax', 'IntDomElement => setIntMax').getStrErr()) return false;
+        this.iMax = iMax;
+    }
+}
+
+class IntDomElement extends DomElement
+{
+    constructor(sIdElement, iMin, iMax) {
+        super(sIdElement);
+        this.oParamInt = new IntParam(iMin, iMax);
+    }
+
+    getIntValue()
+    {
+        let o = this.getObjDomElement();
+        let i = parseInt(o.textContent);
+        if(!new ParamIntCheck(i, 'iVal', 'IntDomElement => setIntValue').setMin(this.iMin).setMax(this.iMax).getStrErr()) return false;
+        return i;
+    }
+
+    setIntValue(iVal)
+    {
+        if(!new ParamIntCheck(iVal, 'iVal', 'IntDomElement => setIntObjElementValue').setMin(this.iMin).setMax(this.iMax).getStrErr()) return false;
+        let o = this.getObjDomElement();
+        o.textContent = iVal;
+    }
+}
+
+
+
+class ToggleClassDomElement extends DomElement
+{
+    constructor(oObject, sClassToggle) {
+        super(oObject);
+        this.sClassToggle = null;
+
+        //PARAM STRING CHECK
+        this.sClassToggle = sClassToggle;
+    }
+
+    setToggleClass(sClassToggle)
+    {
+        //PARAM STR CHECK
+        this.sClassToggle = sClassToggle;
+    }
+
+    addClass() { this.oObject.classList.add(this.sClassToggle); }
+    removeClass() { this.oObject.classList.remove(this.sClassToggle); }
 }

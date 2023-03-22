@@ -46,11 +46,11 @@ class BoardGame
         if(!new ParamIntCheck(idPlayer, 'idPlayer', 'BoardGame => setDotPlayerActive').setMin(1).setMax(2))return false;
         if(idPlayer === 1)
         {
-            this.player1.setDotCurrentPlayerOn();
-            this.player2.setDotCurrentPlayerOff();
+            this.player1.oDotPlayer.removeClass();
+            this.player2.oDotPlayer.addClass();
         } else if(idPlayer === 2) {
-            this.player1.setDotCurrentPlayerOff();
-            this.player2.setDotCurrentPlayerOn();
+            this.player1.oDotPlayer.addClass();
+            this.player2.oDotPlayer.removeClass();
         }
     }
 
@@ -83,27 +83,6 @@ class BoardGame
         let oToast = new ToastAlert(ToastAlert.INFO, 'You scored 1 the turn passes to the next player');
     }
 
-    rollDiceIcon(iDice)
-    {
-        //Masquer tous les dés
-        let oCtnDice = document.getElementById('ctnDiceResult');
-        oCtnDice.querySelectorAll('i').forEach(function(oDice){ oDice.classList.add('hide'); });
-        //Afficher le dé
-        switch(iDice)
-        {
-            case 1: oCtnDice.querySelector('.fa-dice-one').classList.remove('hide'); break;
-            case 2: oCtnDice.querySelector('.fa-dice-two').classList.remove('hide'); break;
-            case 3: oCtnDice.querySelector('.fa-dice-three').classList.remove('hide'); break;
-            case 4: oCtnDice.querySelector('.fa-dice-four').classList.remove('hide'); break;
-            case 5: oCtnDice.querySelector('.fa-dice-five').classList.remove('hide'); break;
-            case 6: oCtnDice.querySelector('.fa-dice-six').classList.remove('hide'); break;
-            default: alert('Error switch Boardgame => rollDiceIcon'); break;
-        }
-    }
 
-    getNumberRandom()
-    {
-        return Math.ceil(Math.random() * ((BoardGame.MAX_DICE  - BoardGame.MIN_DICE) + BoardGame.MIN_DICE));
-    }
 
 }
