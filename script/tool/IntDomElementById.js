@@ -1,4 +1,4 @@
-class ParamIntMinMax extends DomElementById
+class IntDomElementById extends DomElementById
 {
     constructor(sIdElement, iMin, iMax) {
         super(sIdElement);
@@ -10,10 +10,8 @@ class ParamIntMinMax extends DomElementById
 
     getIntMin()
     {
-        try{
-            let oParamCheck = new ParamIntCheck(this.iMin, 'this.iMin');
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
+        try{ new ParamIntCheck(this.iMin, 'this.iMin'); }
+        catch(oErr){
             alert(oErr.message);
             console.log(oErr.message);
             console.trace();
@@ -24,10 +22,8 @@ class ParamIntMinMax extends DomElementById
 
     setIntMin(iMin)
     {
-        try{
-            let oParamCheck = new ParamIntCheck(iMin, 'iMin');
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
+        try{ new ParamIntCheck(iMin, 'iMin'); }
+        catch(oErr){
             alert(oErr.message);
             console.log(oErr.message);
             console.trace();
@@ -38,10 +34,8 @@ class ParamIntMinMax extends DomElementById
 
     getIntMax()
     {
-        try{
-            let oParamCheck = new ParamIntCheck(this.iMax, 'this.iMax');
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
+        try{ new ParamIntCheck(this.iMax, 'this.iMax'); }
+        catch(oErr){
             alert(oErr.message);
             console.log(oErr.message);
             console.trace();
@@ -52,10 +46,8 @@ class ParamIntMinMax extends DomElementById
 
     setIntMax(iMax)
     {
-        try{
-            let oParamCheck = new ParamIntCheck(iMax, 'iMax');
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
+        try{ new ParamIntCheck(iMax, 'iMax'); }
+        catch(oErr){
             alert(oErr.message);
             console.log(oErr.message);
             console.trace();
@@ -65,10 +57,8 @@ class ParamIntMinMax extends DomElementById
     }
 
     setContent(iVal) {
-        try{
-            let oParamCheck = new ParamIntCheck(iVal, 'iVal').checkMin(this.iMin).checkMax(this.iMax);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
+        try{ new ParamIntCheck(iVal, 'iVal').checkMin(this.iMin).checkMax(this.iMax); }
+        catch(oErr){
             alert(oErr.message);
             console.log(oErr.message);
             console.trace();
@@ -82,10 +72,8 @@ class ParamIntMinMax extends DomElementById
     {
         let o = this.getObjDomElement();
         let iContent = parseInt(o.textContent);
-        try{
-            let oParamCheck = new ParamIntCheck(iContent, 'iContent').checkMin(this.iMin).checkMax(this.iMax);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(e){
+        try{ new ParamIntCheck(iContent, 'iContent').checkMin(this.iMin).checkMax(this.iMax); }
+        catch(e){
             alert(e.message);
             console.log(e.message);
             console.trace();

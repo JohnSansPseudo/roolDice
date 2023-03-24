@@ -41,10 +41,8 @@ class Dice1To6
     getNumberRandom()
     {
         const i = Math.ceil(Math.random() * ((this.iDiceMax  - this.iDiceMin) + this.iDiceMin));
-        try{
-            let oParamCheck = new ParamIntCheck(i, 'i').checkMin(this.iDiceMin).checkMax(this.iDiceMax);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
+        try{ new ParamIntCheck(i, 'i').checkMin(this.iDiceMin).checkMax(this.iDiceMax); }
+        catch(oErr){
             alert(oErr.message);
             console.log(oErr.message);
             console.trace();

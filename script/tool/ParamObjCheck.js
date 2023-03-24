@@ -4,27 +4,22 @@ class ParamObjCheck extends ParamCheck
     constructor(obj, sVar)
     {
         super(obj, sVar);
-        if(this.aErr.length < 1)
-        {
-            this.bIsTypeOf = this.checkIsTypeOf(ParamObjCheck.TYPE_OF);
-        }
+        this.bIsTypeOf = this.checkIsTypeOf(ParamObjCheck.TYPE_OF);
+
     }
 
     checkDomElementById(sId)
     {
-        if(sId !== this.val.id)
-        {
-            this.aErr.push(`Error id Element : ${this.val.id} is different to ${sId}`);
-
+        if(sId !== this.val.id) {
+            throw new Error(`Error id Element : ${this.val.id} is different to ${sId}`);
         }
         return this;
-
     }
 
     checkLength()
     {
-        console.log(this.val);
-        console.log(this.val.attributes);
+        /*console.log(this.val);
+        console.log(this.val.attributes);*/
         /* console.log(Object.keys(this.val));
         console.log(Object.values(this.val));
         console.log(Object.entries(this.val));*/

@@ -1,15 +1,12 @@
 "use strict";
 window.addEventListener('load', function(){
 
-
-    let oBoardGame = new BoardGame();
-    /*
-        //TEST
-        let oTestPlayer = new TestPlayerRollDiceGame();
-        oTestPlayer.testGetDotPlayerObj();
-        //oTestPlayer.initTestPlayer();*/
-
-        //TODO FINIR LES TEST ET RELIRE LE COURS + OBJECTIF COURS
+    //let oBoardGame = new BoardGame();
+    //TEST
+    let oTestBoard = new TestBoardRollDiceGame();
+    let oBoardGame = oTestBoard.oBoardGame;
+    oTestBoard.testGame();
+    //TODO FINIR LES TEST ET RELIRE LE COURS + OBJECTIF COURS
 
     // FIN TEST
 
@@ -25,7 +22,7 @@ window.addEventListener('load', function(){
     });
 
     document.getElementById('boxCtnToast').addEventListener('click', function (e){
-        if(e.target.classList.contains(ToastAlert.CLASS_CTN_TOASTER)) e.target.remove();
+        if(e.target.classList.contains(ToastAlert.CLASS_CTN_TOAST_ALERT)) e.target.remove();
     });
 
 });
