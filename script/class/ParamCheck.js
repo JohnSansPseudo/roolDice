@@ -15,12 +15,10 @@ class ParamCheck
 
     /** Retour de l'erreur **/
     getBoolError() { return this.aErr.length <= 0; }
-    alertError(sRetour="\n\n") { alert(this.getStrErr(sRetour)); }
     getStrErr(sRetour="\n\n")
     {
-        let sErr = '';
-        if(this.getBoolError()) sErr = this.aErr.join(sRetour);
-        return sErr;
+        if(!this.getBoolError()) return this.aErr.join(sRetour);
+        return '';
     }
 
     /** FIN Retour de l'erreur **/

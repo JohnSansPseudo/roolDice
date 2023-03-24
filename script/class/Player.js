@@ -86,7 +86,7 @@ class Player
             return false;
         }
 
-        let iLapScore = this.oIntLapScore.getIntMax();
+        let iLapScore = this.oIntLapScore.getContent();
         iLapScore += parseInt(iDiceScore);
         this.oIntLapScore.setContent(iLapScore);
     }

@@ -50,6 +50,7 @@ class Dice1To6
             console.trace();
             return false;
         }
+
         return i;
     }
 }
