@@ -1,13 +1,12 @@
 "use strict";
 window.addEventListener('load', function(){
 
-    //let oBoardGame = new BoardGame();
-    //TEST
-    let oTestBoard = new TestBoardRollDiceGame();
-    let oBoardGame = oTestBoard.oBoardGame;
-    oTestBoard.testGame();
-    //TODO FINIR LES TEST ET RELIRE LE COURS + OBJECTIF COURS
+    let oBoardGame = new BoardGame();
 
+    //TEST
+    /*let oTestBoard = new TestBoardRollDiceGame();
+    let oBoardGame = oTestBoard.oBoardGame;
+    oTestBoard.testGame();*/
     // FIN TEST
 
 

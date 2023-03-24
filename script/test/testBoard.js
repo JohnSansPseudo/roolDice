@@ -6,14 +6,14 @@ class TestBoardRollDiceGame
     {
         while(this.getMaxCurrentScore() < BoardGame.INT_MAX_WIN_CURRENT_SCORE)
         {
-            console.log(this.getMaxCurrentScore());
+            console.log(`highest score : ${this.getMaxCurrentScore()}`);
             console.log('Actual player : ' + this.oBoardGame.getIntIdCurPlayer());
-            //PLayer 1
-            setTimeout(this.playerPlay(3), 10000);
+            //Player 1
+            this.playerPlay(5);
 
             //Player 2
             console.log('Actual player : ' + this.oBoardGame.getIntIdCurPlayer());
-            setTimeout(this.playerPlay(5), 10000);
+            this.playerPlay(5);
         }
     }
 
@@ -28,11 +28,12 @@ class TestBoardRollDiceGame
 
             //Si on fait un on sort de la boucle et fin de la fonction
             console.log('dice value =' + this.oBoardGame.oDice.getIntValDice())
-            if(this.oBoardGame.oDice.getIntValDice() === 1) return ;
+            if(this.oBoardGame.oDice.getIntValDice() === 1) return true;
         }
-        //CLick PLayer Hold Btn
+        //CLick Player Hold Btn
         this.oBoardGame.hold();
         console.log('hold');
+        return true
     }
 
     getMaxCurrentScore()
