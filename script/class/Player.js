@@ -10,32 +10,29 @@ class Player
         this.setIdPlayer(iId);
         this.setPlayerName(sPlayerName);
         this.oDotPlayer = new ToggleClassDomElement('dotPlayer' + this.id, Player.STR_CLASS_HIDE);
-        this.oIntLapScore = new ParamIntMinMax('lapScorePlayer' + this.id, 0, BoardGame.INT_LAP_SCORE_MAX);
-        this.oIntCurrentScore = new ParamIntMinMax('currentScorePlayer' + this.id, 0, BoardGame.INT_MAX_WIN_CURRENT_SCORE);
+        this.oIntLapScore = new IntDomElementById('lapScorePlayer' + this.id, 0, BoardGame.INT_LAP_SCORE_MAX);
+        this.oIntCurrentScore = new IntDomElementById('currentScorePlayer' + this.id, 0, BoardGame.INT_MAX_WIN_CURRENT_SCORE);
     }
 
     setPlayerName(sPlayerName)
     {
-        try{
-            let oParamCheck = new ParamStrCheck(sPlayerName, 'sPlayerName').checkIntMinLength(3).checkIntMaxLength(20);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
-            alert(oErr.message);
-            console.log(oErr.message);
+        try{ new ParamStrCheck(sPlayerName, 'sPlayerName').checkMinLen(3).checkMaxLen(20); }
+        catch (e){
+            alert(e.message);
+            console.error(e.message);
             console.trace();
             return false;
         }
-        this.sName = sPlayerName;
+
+        return this.sName = sPlayerName;
     }
 
     getPlayerName()
     {
-        try{
-            let oParamCheck = new ParamStrCheck(this.sName, 'this.sName').checkIntMinLength(3).checkIntMaxLength(20);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
-            alert(oErr.message);
-            console.log(oErr.message);
+        try { new ParamStrCheck(this.sName, 'this.sName').checkMinLen(3).checkMaxLen(20);}
+        catch (e){
+            alert(e.message);
+            console.error(e.message);
             console.trace();
             return false;
         }
@@ -44,28 +41,25 @@ class Player
 
     setIdPlayer(iId)
     {
-        try{
-            let oParamCheck = new ParamIntCheck(iId, 'iId').checkMin(this.iIdMin).checkMax(this.iIdMax);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
-            alert(oErr.message);
-            console.log(oErr.message);
+        try { new ParamIntCheck(iId, 'iId').checkMin(this.iIdMin).checkMax(this.iIdMax);}
+        catch (e){
+            alert(e.message);
+            console.error(e.message);
             console.trace();
             return false;
         }
         this.id = iId;
+        return this.id;
     }
 
     getIdPlayer()
     {
-        try{
-            let oParamCheck = new ParamIntCheck(this.id, 'this.id').checkMin(this.iIdMin).checkMax(this.iIdMax);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
-            alert(oErr.message);
-            console.log(oErr.message);
+        try { new ParamIntCheck(this.id, 'this.id').checkMin(this.iIdMin).checkMax(this.iIdMax);}
+        catch (e){
+            alert(e.message);
+            console.error(e.message);
             console.trace();
-            return 0;
+            return false;
         }
         return this.id;
     }
@@ -75,12 +69,11 @@ class Player
     {
         //Le lap score ne peut pas être de 1 puisque quand le joueur fait 1 il passe son tour et son lap score passe à 0
         //Le lap score ne peut pas être de 0 ça ne sert à rien d'ajouter 0 au score global
-        try{
-            let oParamCheck = new ParamIntCheck(iDiceScore, 'iDiceScore').checkMin(2);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
-            alert(oErr.message);
-            console.log(oErr.message);
+
+        try { new ParamIntCheck(iDiceScore, 'iDiceScore').checkMin(2); }
+        catch (e){
+            alert(e.message);
+            console.error(e.message);
             console.trace();
             this.oIntLapScore.setContent(0);
             return false;
@@ -100,14 +93,13 @@ class Player
         //iLapScore ne peut pas être de 1 puisque quand le joueur fait 1 il passe son tour et son lap score passe à 0
         //iLapScore ne peut pas être de 0 ça ne sert à rien d'ajouter 0 au score global
         //iLapScore n'a pas de maximum mais on considère que si le joueur obtient un lap score > BoardGame.INT_MAX_LAP_SCORE alors c'est truqué
-        try{
-            let oParamCheck = new ParamIntCheck(iLapScore, 'iLapScore').checkMin(2).checkMax(this.oIntLapScore.getIntMax());
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
-            alert(oErr.message);
-            console.log(oErr.message);
+
+            //let oParamCheck = new ParamIntCheck(iLapScore, 'iLapScore').checkMin(2).checkMax(this.oIntLapScore.getIntMax());
+        try { new ParamIntCheck(iLapScore, 'iLapScore').checkMin(2).checkMax(this.oIntLapScore.getIntMax()); }
+        catch (e){
+            alert(e.message);
+            console.error(e.message);
             console.trace();
-            this.oIntLapScore.setContent(0);
             return false;
         }
 
@@ -115,6 +107,7 @@ class Player
         iCurrentScore += iLapScore;
         if(iCurrentScore > this.oIntCurrentScore.getIntMax()) iCurrentScore = this.oIntCurrentScore.getIntMax();
         this.oIntCurrentScore.setContent(iCurrentScore);
+        this.oIntLapScore.setContent(0);
     }
     /** FIN CURRENT SCORE **/
 }

@@ -1,39 +1,44 @@
-
 class TestBoardRollDiceGame
 {
-    initTestPlayer()
+    constructor() { this.oBoardGame = new BoardGame(); }
+
+    testGame()
     {
+        while(this.getMaxCurrentScore() < BoardGame.INT_MAX_WIN_CURRENT_SCORE)
+        {
+            console.log(this.getMaxCurrentScore());
+            console.log('Actual player : ' + this.oBoardGame.getIntIdCurPlayer());
+            //PLayer 1
+            setTimeout(this.playerPlay(3), 10000);
 
-        this.testGetNumberRandom();
-
+            //Player 2
+            console.log('Actual player : ' + this.oBoardGame.getIntIdCurPlayer());
+            setTimeout(this.playerPlay(5), 10000);
+        }
     }
 
-    testGetNumberRandom()
+    playerPlay(iTourMax)
     {
-        //Int
-        //Max 6
-        //Min 1
-        let sFunction = 'testGetNumberRandom';
-        //Il faut que tout les chiffres soient supprimés du tableau
-        let aNumber = [1, 2, 3, 4, 5, 6];
-        //ON fait 1000 tests sur la fonction getNumberRandom on vérifie à chaque que le chiffre est un number compris en 1 et 6 inclus
-        for(let i =0; i < 1000; i++)
+        console.log('playerPlay');
+        for(let i=0; i<iTourMax; i++)
         {
-            let iNumber = oBoardGame.getNumberRandom();
-            if(! new ParamIntCheck(oBoardGame.getNumberRandom(), 'iRandom', sFunction).checkMin(1).checkMax(6).getStrErr()) return false;
-            aNumber.forEach(function(iNumberTab){
-                if(iNumber == iNumberTab)
-                {
-                    let iIndex = aNumber.indexOf(iNumber)
-                    if(iIndex !== -1) aNumber.splice(iIndex, 1);
-                }
-            });
+            //Click PLayer ROll Dice btn
+            console.log('roll dice');
+            this.oBoardGame.rollDiceBoard();
+
+            //Si on fait un on sort de la boucle et fin de la fonction
+            console.log('dice value =' + this.oBoardGame.oDice.getIntValDice())
+            if(this.oBoardGame.oDice.getIntValDice() === 1) return ;
         }
-        //SI le tableau aNumber contient un des chiffre alors on considère que le tableau ne fonctionne pas bien
-        if(aNumber.length > 0)
-        {
-            alert(aNumber.join(", "));
-            return false;
-        }
+        //CLick PLayer Hold Btn
+        this.oBoardGame.hold();
+        console.log('hold');
+    }
+
+    getMaxCurrentScore()
+    {
+        let iMax = this.oBoardGame.oPlayer1.oIntCurrentScore.getContent();
+        if(this.oBoardGame.oPlayer2.oIntCurrentScore.getContent() > iMax) iMax = this.oBoardGame.oPlayer2.oIntCurrentScore.getContent();
+        return iMax;
     }
 }

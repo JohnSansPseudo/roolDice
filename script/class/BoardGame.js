@@ -25,12 +25,10 @@ class BoardGame
 
     setIntIdCurPlayer(iIdCurPlayer)
     {
-        try{
-            let oParamCheck = new ParamIntCheck(iIdCurPlayer, 'iIdCurPlayer').checkMin(this.oPlayer1.iIdMin).checkMax(this.oPlayer1.iIdMax);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
-            alert(oErr.message);
-            console.log(oErr.message);
+        try { new ParamIntCheck(iIdCurPlayer, 'iIdCurPlayer').checkMin(this.oPlayer1.iIdMin).checkMax(this.oPlayer1.iIdMax); }
+        catch (e){
+            alert(e.message);
+            console.error(e.message);
             console.trace();
             return false;
         }
@@ -40,18 +38,16 @@ class BoardGame
     getCurPlayer()
     {
         let oCurPlayer = this.oPlayer1;
-        if(this.getIntIdCurPlayer() === 2) oCurPlayer = this.oPlayer1;
+        if(this.getIntIdCurPlayer() === 2) oCurPlayer = this.oPlayer2;
         return oCurPlayer;
     }
 
     getIntIdCurPlayer()
     {
-        try{
-            let oParamCheck = new ParamIntCheck(this.iIdCurPlayer, 'this.iIdCurPlayer').checkMin(this.oPlayer1.iIdMin).checkMax(this.oPlayer1.iIdMax);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
-            alert(oErr.message);
-            console.log(oErr.message);
+        try { new ParamIntCheck(this.iIdCurPlayer, 'this.iIdCurPlayer').checkMin(this.oPlayer1.iIdMin).checkMax(this.oPlayer1.iIdMax); }
+        catch (e){
+            alert(e.message);
+            console.error(e.message);
             console.trace();
             return false;
         }
@@ -81,18 +77,16 @@ class BoardGame
 
     switchPlayerTurnByScored1()
     {
-        let idNewCurPlayer = 0;
+        let idNewCurPlayer = 1;
         if(this.getIntIdCurPlayer() === 1) idNewCurPlayer = 2;
-        else if(this.getIntIdCurPlayer() === 2) idNewCurPlayer = 1;
         this.setPlayerTurn(idNewCurPlayer);
         this.messageSwitchTurnByScored1();
     }
 
     switchPlayerTurn()
     {
-        let idNewCurPlayer = 0;
+        let idNewCurPlayer = 1;
         if(this.getIntIdCurPlayer() === 1) idNewCurPlayer = 2;
-        else if(this.getIntIdCurPlayer() === 2) idNewCurPlayer = 1;
         this.setPlayerTurn(idNewCurPlayer);
         this.messageSwitchTurn();
     }
@@ -105,12 +99,10 @@ class BoardGame
 
     setDotPlayerActive(idPlayer)
     {
-        try{
-            let oParamCheck = new ParamIntCheck(idPlayer, 'idPlayer').checkMin(this.oPlayer1.iIdMin).checkMax(this.oPlayer1.iIdMax);
-            if(oParamCheck.aErr.length > 0)throw new Error(oParamCheck.getStrErr());
-        } catch(oErr){
-            alert(oErr.message);
-            console.log(oErr.message);
+        try { new ParamIntCheck(idPlayer, 'idPlayer').checkMin(this.oPlayer1.iIdMin).checkMax(this.oPlayer1.iIdMax); }
+        catch (e){
+            alert(e.message);
+            console.error(e.message);
             console.trace();
             return false;
         }
@@ -158,4 +150,5 @@ class BoardGame
     {
         new ToastAlert(ToastAlert.INFO, 'The turn passes to the next player');
     }
+
 }
