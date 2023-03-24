@@ -20,7 +20,7 @@ class TestBoardRollDiceGame
         for(let i =0; i < 1000; i++)
         {
             let iNumber = oBoardGame.getNumberRandom();
-            if(! new ParamIntCheck(oBoardGame.getNumberRandom(), 'iRandom', sFunction).setMin(1).setMax(6).getStrErr()) return false;
+            if(! new ParamIntCheck(oBoardGame.getNumberRandom(), 'iRandom', sFunction).checkMin(1).checkMax(6).getStrErr()) return false;
             aNumber.forEach(function(iNumberTab){
                 if(iNumber == iNumberTab)
                 {

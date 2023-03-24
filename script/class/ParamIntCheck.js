@@ -1,89 +1,51 @@
-class ParamIntCheck
+class ParamIntCheck extends ParamCheck
 {
-    constructor(iInt, sVar, sFunction) {
-        this.oErr = {};
-        this.sVar = sVar;
-        this.sFunction = sFunction;
-        this.val = iInt;
-        this.bIsUndefined = this.checkUndefined();
-        this.bIsNaN = true;
-        this.bIsNumber = false;
-        if(!this.bIsUndefined)
+    constructor(iInt, sVar) {
+        super(iInt, sVar);
+        if(this.aErr.length < 1)
         {
             this.bIsNaN = this.checkIsNan();
-            if(this.bIsNaN) this.bIsNumber = this.checkIsNumber();
-            else return true;
+            if(this.aErr.length < 1) this.bIsTypeOf = this.checkIsTypeOf();
         }
-    }
-
-    /** Retour de l'erreur **/
-    getStrErr(sRetour="\n\n"){
-        let sErr = this.getStrErrVal(sRetour);
-        if(Object.values(this.oErr).length > 0)
-        {
-            alert(sErr);
-            return false;
-        }
-        return true;
-    }
-    /** FIN Retour de l'erreur **/
-
-    getStrErrVal(sRetour="\n\n")
-    {
-        let sErr = '';
-        if(Object.values(this.oErr).length > 0)
-        {
-            Object.values(this.oErr).forEach(function(el) { sErr += el + sRetour });
-        }
-        return sErr;
-    }
-
-    checkUndefined(){
-        if(this.val == undefined)
-        {
-            this.oErr.undef = `Error param, int : "${this.sVar}" from function : "${ this.sFunction }" is undefined`;
-            return true;
-        }
-        else return false;
     }
 
     checkIsNan()
     {
         if(isNaN(this.val))
         {
-            this.oErr.isNaN = `Error param ${this.sVar } : ${this.val } from function "${ this.sFunction }" is not a number`;
+            this.aErr.push(`Error ${this.sVar } : ${this.val } is not a number`);
             return false;
         }
         return true;
     }
 
-    checkIsNumber(){
-        if((typeof this.val === 'number') === false)
-        {
-            this.oErr.isNumber = `Error param ${this.sVar } : ${this.val } from function "${ this.sFunction }" is not type of number`;
-            return false;
-        }
-        return true;
-    }
-
-    setMin(iMin)
+    checkMin(iMin)
     {
-        if(this.bIsUndefined || !this.bIsNaN || !this.bIsNumber) return this;
+        if(this.aErr.length > 0) return this;
         if(this.val < iMin)
         {
-            this.oErr.setMin = `Error param, int : "${this.sVar}" from function : "${ this.sFunction }" is < ${iMin}`;
+            this.aErr.push(`Error ${this.sVar} < iMin , ${this.val} < ${iMin}`);
         }
         return this;
     }
 
-
-    setMax(iMax)
+    checkMax(iMax)
     {
-        if(this.bIsUndefined || !this.bIsNaN || !this.bIsNumber) return this;
+        if(this.aErr.length > 0) return this;
         if(this.val > iMax)
         {
-            this.oErr.setMin = `Error param, int : "${this.sVar}" from function : "${ this.sFunction }" is > ${iMax}`;
+            this.aErr.push(`Error ${this.sVar} > iMax , ${this.val} > ${iMax}`);
         }
         return this;
+    }
+
+    checkIsTypeOf()
+    {
+        if(!Number.isInteger(this.val))
+        {
+            this.aErr.push(`Error ${this.sVar } : ${this.val } is not an integer, typeOf ${this.sVar } : ${typeof this.val}`);
+            return false;
+        }
+        return true;
     }
 }

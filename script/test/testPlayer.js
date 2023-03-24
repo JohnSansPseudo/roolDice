@@ -72,7 +72,7 @@ class TestPlayerRollDiceGame
     testGetLapScore()
     {
         let sFunction = 'testGetLapScore';
-        if(! new ParamIntCheck(player1.getIntLapScore(), 'iLapScore', sFunction).setMin(0).getStrErr()) return false;
+        if(! new ParamIntCheck(player1.getIntLapScore(), 'iLapScore', sFunction).checkMin(0).getStrErr()) return false;
     }
 
     testSetLapScore()
@@ -127,7 +127,7 @@ class TestPlayerRollDiceGame
     {
         //Test que la fonction renvoie bien un "number" compris entre 0 et 100 inclus
         let sFunction = 'testGetCurrentScore';
-        if(! new ParamIntCheck(player1.getIntCurrentScore(), 'iCurrentScore', sFunction).setMin(0).setMax(100).getStrErr()) return false;
+        if(! new ParamIntCheck(player1.getIntCurrentScore(), 'iCurrentScore', sFunction).checkMin(0).checkMax(100).getStrErr()) return false;
     }
 
     testSetCurrentScore()
