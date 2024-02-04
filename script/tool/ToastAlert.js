@@ -6,7 +6,7 @@ class ToastAlert
     static DANGER = 'danger';
     static CLASS_CTN_TOAST_ALERT = 'ctnToaster';
     static CLASS_BOX_TOAST_ALERT = 'boxCtnToast';
-    static TIME_TOAST_DISP = 1000;
+    static TIME_TOAST_DISP = 2500;
 
     constructor(sType, sMess)
     {

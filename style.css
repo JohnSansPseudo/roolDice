@@ -52,10 +52,15 @@ body{
     margin-right: 5px;
 }
 #ctnActionUser{
-    margin-top: -15px;
+    margin-top: 55px;
+    z-index: 11;
 }
-#ctnActionUser div{
+
+
+#ctnActionUser div {
     margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 3px;
 }
 
 #btnNewGame:hover i{
@@ -67,7 +72,10 @@ body{
 }
 
 
-
+#btnRollDice:hover,
+#btnHold:hover{
+    background-color: #f1f1f3;
+}
 
 /** UTILITIES */
 

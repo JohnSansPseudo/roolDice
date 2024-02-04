@@ -23,7 +23,7 @@ class ParamIntCheck extends ParamCheck
     checkMin(iMin)
     {
         if(this.val < iMin){
-            throw new Error(`Error ${this.sVar} < iMin , ${this.val} < ${iMin}`);
+            throw new Error(`Error ${this.sVar} is inferior to the minimum : ${this.val} < ${iMin}`);
         }
         return this;
 
@@ -32,7 +32,7 @@ class ParamIntCheck extends ParamCheck
     checkMax(iMax)
     {
         if(this.val > iMax) {
-            throw new Error(`Error ${this.sVar} > iMax , ${this.val} > ${iMax}`);
+            throw new Error(`Error ${this.sVar} is superior to the maximum : ${this.val} > ${iMax}`);
         }
         return this;
     }

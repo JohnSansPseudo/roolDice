@@ -33,7 +33,7 @@ class TestBoardRollDiceGame
         //CLick Player Hold Btn
         this.oBoardGame.hold();
         console.log('hold');
-        return true
+        return true;
     }
 
     getMaxCurrentScore()

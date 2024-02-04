@@ -94,20 +94,14 @@ class Player
         //iLapScore ne peut pas être de 0 ça ne sert à rien d'ajouter 0 au score global
         //iLapScore n'a pas de maximum mais on considère que si le joueur obtient un lap score > BoardGame.INT_MAX_LAP_SCORE alors c'est truqué
 
-            //let oParamCheck = new ParamIntCheck(iLapScore, 'iLapScore').checkMin(2).checkMax(this.oIntLapScore.getIntMax());
-        try { new ParamIntCheck(iLapScore, 'iLapScore').checkMin(2).checkMax(this.oIntLapScore.getIntMax()); }
-        catch (e){
-            alert(e.message);
-            console.error(e.message);
-            console.trace();
-            return false;
-        }
+        new ParamIntCheck(iLapScore, 'your lap score').checkMin(1).checkMax(this.oIntLapScore.getIntMax());
 
         let iCurrentScore = this.oIntCurrentScore.getContent();
         iCurrentScore += iLapScore;
         if(iCurrentScore > this.oIntCurrentScore.getIntMax()) iCurrentScore = this.oIntCurrentScore.getIntMax();
         this.oIntCurrentScore.setContent(iCurrentScore);
         this.oIntLapScore.setContent(0);
+
     }
     /** FIN CURRENT SCORE **/
 }

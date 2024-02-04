@@ -1,12 +1,12 @@
 "use strict";
 window.addEventListener('load', function(){
 
-    let oBoardGame = new BoardGame();
+    // let oBoardGame = new BoardGame();
 
     //TEST
-    /*let oTestBoard = new TestBoardRollDiceGame();
+    let oTestBoard = new TestBoardRollDiceGame();
     let oBoardGame = oTestBoard.oBoardGame;
-    oTestBoard.testGame();*/
+    oTestBoard.testGame();
     // FIN TEST
 
 
@@ -17,7 +17,8 @@ window.addEventListener('load', function(){
     });
     document.getElementById('btnHold').addEventListener('click', function(){
         if(oBoardGame.gameOn === false){ oBoardGame.messageNewGame();}
-        else{ oBoardGame.hold(); }
+        else oBoardGame.hold();
+
     });
 
     document.getElementById('boxCtnToast').addEventListener('click', function (e){

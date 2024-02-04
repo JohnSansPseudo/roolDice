@@ -67,12 +67,20 @@ class BoardGame
     hold()
     {
         let oCurPlayer = this.getCurPlayer();
-        oCurPlayer.increaseIntCurrentScore();
-        if(oCurPlayer.oIntCurrentScore.getContent() === oCurPlayer.oIntCurrentScore.getIntMax()) this.endGame();
-        else {
-            oCurPlayer.oIntLapScore.setContent(0);
-            this.switchPlayerTurn();
+        try{
+            oCurPlayer.increaseIntCurrentScore();
+            if(oCurPlayer.oIntCurrentScore.getContent() === oCurPlayer.oIntCurrentScore.getIntMax()) this.endGame();
+            else {
+                oCurPlayer.oIntLapScore.setContent(0);
+                this.switchPlayerTurn();
+            }
+        }catch (e){
+            alert(e.message);
+            console.error(e.message);
+            console.trace();
+            return false;
         }
+
     }
 
     switchPlayerTurnByScored1()
